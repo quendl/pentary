@@ -15,10 +15,10 @@ module.exports = {
     .setName("client")
     .setDescription("Switch to a different client state")
     .addSubcommand((sub) =>
-      sub.setName("init").setDescription("Initialize the client")
+      sub.setName("on").setDescription("Enable the client")
     )
     .addSubcommand((sub) =>
-      sub.setName("reset").setDescription("Disable the client globally")
+      sub.setName("off").setDescription("Disable the client globally")
     ),
   async execute(interaction: CommandInteraction) {
     // check if the user is an owner
@@ -29,7 +29,7 @@ module.exports = {
     const sub = interaction.options.getSubcommand();
 
     const dataQuery = await Guild.findOne({ id: interaction.guild?.id });
-    if (sub === "init") {
+    if (sub === "on") {
       // If there is data, return and dont save new data
       if (dataQuery)
         return interaction.followUp({
@@ -47,7 +47,7 @@ module.exports = {
         content: `${emojis.success} | Successfully initialized the client`,
         ephemeral: true,
       });
-    } else if (sub === "reset") {
+    } else if (sub === "off") {
       // If there isnt anything to delete, dont do anything
       if (!dataQuery)
         return interaction.followUp({
