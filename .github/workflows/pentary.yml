@@ -1,0 +1,9 @@
+name: Pentary
+on: [push]
+jobs: 
+  Pentary Discord 
+    runs-on: ubuntu-latest
+    steps: 
+      - run: npm install
+      - run: npm run lint
+      - run: npm run build
