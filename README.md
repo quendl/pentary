@@ -1,10 +1,13 @@
-# pentary
-...
+# 🤖 Pentary
+Glups connection to the Discord world! 
+
+Helps user with a FAQ based command system to find everything they need
 
  ## 🤷 Why?
-...
+If the docs aren't enough, you can still ask us anything on our [Discord Server]()
+<hr>
 
-## 🧏‍♂️ Setup
+### 🧏‍♂️ Developer Setup
 
 Discord setup:
 
@@ -25,7 +28,7 @@ NODE_ENV=development
 npm i
 ```
 
-up && running
+`up && running` in dev mode
 ```
 npm run dev
 ```
