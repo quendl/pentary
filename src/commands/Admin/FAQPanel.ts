@@ -33,42 +33,44 @@ module.exports = {
 
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
-        .setCustomId("roles")
-        .setPlaceholder("Select a reaction role")
+        .setCustomId("questions")
+        .setPlaceholder("Nothing selected")
+        .setMinValues(1)
         .addOptions([
           {
-            label: "Reaction Role 1",
-            description: "Take this role by clicking me ",
+            label: "Question 1",
+            description: "Description about Q1",
             value: "first_option",
             emoji: "😀",
           },
           {
-            label: "Reaction Role 2",
-            description: "Take this role by clicking me ",
+            label: "Question 2",
+            description: "Description about Q1",
             value: "second_option",
             emoji: "😃",
           },
           {
-            label: "Reaction Role 3",
-            description: "Take this role by clicking me ",
+            label: "Question 3",
+            description: "Description about Q1",
             value: "third_option",
             emoji: "😄",
           },
           {
-            label: "Reaction Role 4",
-            description: "Take this role by clicking me ",
+            label: "Question 4",
+            description: "Description about Q1",
             value: "fourth_option",
             emoji: "😁",
           },
           {
-            label: "Reaction Role 5",
-            description: "Take this role by clicking me s",
+            label: "Question 5",
+            description: "Description about Q1",
             value: "fifth_option",
             emoji: "😆",
           },
         ])
     );
 
+    interaction.reply({ content: "Done!", ephemeral: true });
     (channel as TextChannel).send({ content: "Select", components: [row] });
   },
 };
