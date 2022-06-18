@@ -10,10 +10,14 @@ Discord setup:
 
 `.env` file
 ```
+TOKEN= 
+
 CLIENT_ID=
 GUILD_ID=
-TOKEN=
-NODE_ENV= <development>|<production>
+OWNER= 
+
+MONGODB_TOKEN=
+NODE_ENV=development
 ```
 
 `installing` dependencies
