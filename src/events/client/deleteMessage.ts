@@ -1,5 +1,5 @@
 import { CommandInteraction, Message } from "discord.js";
-import { permsCheck } from "../../util/security/permissions";
+import { permsCheck } from "../../util/guards/permissions";
 
 module.exports = {
   name: "interactionCreate",

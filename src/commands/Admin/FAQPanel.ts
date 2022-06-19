@@ -8,7 +8,7 @@ import {
 
 // Config
 import emojis from "../../util/frontend/emojis";
-import { ownerCheck } from "../../util/security/owner";
+import { ownerCheck } from "../../util/guards/owner";
 
 // Database query
 import Guild from "../../models/Admin/ActivateClient";
