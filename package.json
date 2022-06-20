@@ -1,6 +1,6 @@
 {
   "name": "pentary",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "Discord client for Quendl",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
-  "author": "vKxni",
+  "author": "github.com/vKxni",
   "license": "ISC",
   "devDependencies": {
     "@types/diff": "^5.0.2",
