@@ -1,6 +1,6 @@
 import { Client, Intents, Collection } from "discord.js";
 import { red } from "colors";
-import { getAllFiles } from "./util";
+import { getAllFiles } from "./getAllFiles";
 
 import "../deployCommands";
 import path from "path";

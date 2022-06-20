@@ -1,6 +1,6 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-import { getAllFiles } from "./util/util";
+import { getAllFiles } from "./util/getAllFiles";
 
 import Logger from "./util/logger";
 import path from "path";
