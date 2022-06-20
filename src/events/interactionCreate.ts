@@ -11,9 +11,10 @@ module.exports = {
     // get all of the commands
     const command = interaction.client.commands.get(interaction.commandName);
 
-    // if there isnt any command, return
+    // if there aren't any command, return
     if (!command) return;
-    
+
+    // Slash command options (/test <sub1> <sub2>)
     const args = [];
     for (let option of interaction.options.data) {
       if (option.type === "SUB_COMMAND") {
