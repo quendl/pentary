@@ -1,7 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import {
-  CommandInteraction,
-} from "discord.js";
+import { CommandInteraction } from "discord.js";
 
 // Config
 import emojis from "../../util/frontend/emojis";
