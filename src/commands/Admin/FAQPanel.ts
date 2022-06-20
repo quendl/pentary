@@ -35,7 +35,6 @@ module.exports = {
       new MessageSelectMenu()
         .setCustomId("questions")
         .setPlaceholder("Nothing selected")
-        .setMinValues(1)
         .addOptions([
           {
             label: "Question 1",
