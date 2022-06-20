@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const emailLogger = new Logger();
 
-export async function emailClient() {
+export async function emailClient(email: string) {
   let transporter = nodemailer.createTransport({
     service: process.env.SERVICE,
     port: 587,
@@ -17,7 +17,7 @@ export async function emailClient() {
 
   let info = await transporter.sendMail({
     from: 'Pentary Client', 
-    to: "...", 
+    to: email, 
     subject: "Hello test✔",
     text: "Test", 
     html: "<b>Test</b>", 
@@ -26,4 +26,3 @@ export async function emailClient() {
   emailLogger.success("Successfully sent email")
 }
 
-emailClient().catch(console.error);
