@@ -1,6 +1,6 @@
 import { CommandInteraction } from "discord.js";
 
-import emojis from "../../Controller/emojis";
+import emojis from "../../util/frontend/emojis";
 
 export function ownerCheck(interaction: CommandInteraction) {
   if (!process.env.OWNER?.includes(interaction.user.id)) {

@@ -1,6 +1,6 @@
 import { CommandInteraction, GuildMember } from "discord.js";
 
-import emojis from "../../Controller/emojis";
+import emojis from "../../util/frontend/emojis";
 
 export function permsCheck(interaction: CommandInteraction) {
   if (!(interaction.member as GuildMember).permissions.has("MANAGE_MESSAGES")) {

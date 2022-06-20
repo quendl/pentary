@@ -1,7 +1,7 @@
 import { CommandInteraction } from "discord.js";
 
 // configs
-import emojis from "../Controller/emojis";
+import emojis from "../util/frontend/emojis";
 
 module.exports = {
   name: "interactionCreate",
