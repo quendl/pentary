@@ -10,9 +10,6 @@ import {
 import emojis from "../../util/frontend/emojis";
 import { ownerCheck } from "../../util/guards/owner";
 
-// Database query
-import Guild from "../../models/Admin/ActivateClient";
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("faqpanel")

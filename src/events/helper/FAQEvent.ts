@@ -1,4 +1,4 @@
-import { CommandInteraction, GuildMemberRoleManager, Role } from "discord.js";
+import { CommandInteraction } from "discord.js";
 
 module.exports = {
   name: "interactionCreate",
