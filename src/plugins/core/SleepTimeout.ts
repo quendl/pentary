@@ -5,6 +5,12 @@
  * @param {number} milliseconds Time, in milliseconds, to pause.
  * @returns {Promise<void>} Promise that resolves after the given time.
  */
+
+/*
 export const sleep = async (milliseconds: number): Promise<void> => {
   await new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
+*/
+
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
