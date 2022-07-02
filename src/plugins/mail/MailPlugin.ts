@@ -1,3 +1,7 @@
+/* 
+  This is an example how to use and send emails 
+*/
+
 import nodemailer from "nodemailer";
 import Logger from "../../util/logger";
 require("dotenv").config();
