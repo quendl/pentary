@@ -34,34 +34,34 @@ module.exports = {
         .setPlaceholder("Nothing selected")
         .addOptions([
           {
-            label: "Question 1",
-            description: "Description about Q1",
+            label: "What is Pentary?",
+            description: "Tells you more about Pentary",
             value: "first_option",
-            emoji: "😀",
+            emoji: `${emojis.botserver}`,
           },
           {
-            label: "Question 2",
-            description: "Description about Q1",
+            label: "Why did you choose Discord?",
+            description: "Why we have choosed Discord as our Community",
             value: "second_option",
-            emoji: "😃",
+            emoji: `${emojis.users}`,
           },
           {
-            label: "Question 3",
-            description: "Description about Q1",
+            label: "Privacy Policy",
+            description: "Where can I view the Privacy Policy?",
             value: "third_option",
-            emoji: "😄",
+            emoji: `${emojis.review}`,
           },
           {
-            label: "Question 4",
-            description: "Description about Q1",
+            label: "Developer/Partner Applications",
+            description: "The secret way to join our team",
             value: "fourth_option",
-            emoji: "😁",
+            emoji: `${emojis.partner}`,
           },
           {
-            label: "Question 5",
-            description: "Description about Q1",
+            label: "What data is being stored here?",
+            description: "How your data is being handled here",
             value: "fifth_option",
-            emoji: "😆",
+            emoji: `${emojis.save}`,
           },
         ])
     );
