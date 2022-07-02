@@ -1,9 +1,11 @@
 import { Client, Intents, Collection } from "discord.js";
-import { red } from "colors";
+
+// utility 
 import { getAllFiles } from "./getAllFiles";
+import { red } from "colors";
+import path from "path";
 
 import "../deployCommands";
-import path from "path";
 require("dotenv").config();
 
 declare module "discord.js" {
