@@ -93,8 +93,10 @@ module.exports = {
       .setColor("RED");
 
     const ifIsABot = new MessageEmbed()
-    .setDescription(`${emojis.error} | You cannot add bots to the Staff members!`)
-    .setColor("RED");
+      .setDescription(
+        `${emojis.error} | You cannot add bots to the Staff members!`
+      )
+      .setColor("RED");
 
     // notification embeds
     const userEmbed = new MessageEmbed()
@@ -118,7 +120,8 @@ module.exports = {
     );
 
     // do not allow bots being added
-    if(user?.bot) return interaction.followUp({ embeds: [ifIsABot], ephemeral: true });
+    if (user?.bot)
+      return interaction.followUp({ embeds: [ifIsABot], ephemeral: true });
 
     if (sub === "add") {
       if (userQuery)
