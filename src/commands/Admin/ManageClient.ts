@@ -1,9 +1,12 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction } from "discord.js";
+import { CommandInteraction, MessageEmbed } from "discord.js";
 
 // Config
+import nodemailer from "nodemailer";
 import emojis from "../../util/frontend/emojis";
 import { ownerCheck } from "../../util/guards/owner";
+import client from "../../util/bot";
+require("dotenv").config();
 
 // Database query
 import Guild from "../../models/Admin/ActivateClient";
@@ -26,35 +29,76 @@ module.exports = {
     await interaction.deferReply();
     const sub = interaction.options.getSubcommand();
 
+    // embeds
+    const successInit = new MessageEmbed()
+      .setDescription(`${emojis.success} | Client successfully initialized.`)
+      .setColor("GREEN");
+
+    const successDisable = new MessageEmbed()
+      .setDescription(`${emojis.success} | Client successfully disabled.`)
+      .setColor("GREEN");
+
+    const AlreadyInitialized = new MessageEmbed()
+      .setDescription(`${emojis.error} | Client already initialized.`)
+      .setColor("RED");
+
+    const notInitializedYet = new MessageEmbed()
+      .setDescription(`${emojis.error} | Client isn't initialized yet.`)
+      .setColor("RED");
+
     const dataQuery = await Guild.findOne({ id: interaction.guild?.id });
     if (sub === "on") {
       // If there is data, return and dont save new data
       if (dataQuery)
         return interaction.followUp({
-          content: `${emojis.error} | Client already initialized`,
+          embeds: [AlreadyInitialized],
           ephemeral: true,
         });
       // If no data, create new data
       const newData = new Guild({
-        guildID: interaction.guild?.id,
         userID: interaction.user.id,
+        guildID: interaction.guild?.id,
         Date: new Date(),
       });
       newData.save();
       interaction.followUp({
-        content: `${emojis.success} | Successfully initialized the client`,
+        embeds: [successInit],
         ephemeral: true,
+      });
+      let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASS,
+        },
+      });
+      await transporter.sendMail({
+        from: "Pentary Logging",
+        to: process.env.TO,
+        subject: "Pentary Client",
+        text: `
+        This is a confirmation about ${client.user?.tag}'s state.
+
+        ---- ---- ----
+
+        Init by: ${interaction.user.tag} (${interaction.user.id})
+        Guild: ${interaction.guild?.name} (${interaction.guild?.id})
+        Date: ${new Date()}
+        ---- ---- ----
+        `,
       });
     } else if (sub === "off") {
       // If there isnt anything to delete, dont do anything
       if (!dataQuery)
         return interaction.followUp({
-          content: `${emojis.error} |  Client isn't initialized yet.`,
+          embeds: [notInitializedYet],
           ephemeral: true,
         });
       dataQuery.delete();
       interaction.followUp({
-        content: `${emojis.success} | Client successfully disabled.`,
+        embeds: [successDisable],
         ephemeral: true,
       });
     }
