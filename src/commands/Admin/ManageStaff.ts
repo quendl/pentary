@@ -120,7 +120,6 @@ module.exports = {
     // do not allow bots being added
     if(user?.bot) return interaction.followUp({ embeds: [ifIsABot], ephemeral: true });
 
-    // + send a message into the staff logs (discord admin channel) + Koni a DM
     if (sub === "add") {
       if (userQuery)
         return interaction.followUp({
