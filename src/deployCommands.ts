@@ -39,7 +39,9 @@ const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
       throw new Error("Couldn't find NODE_ENV");
     }
 
-    infoLogger.success(`Successfully reloaded ${commands.length} application (/) commands.`);
+    infoLogger.success(
+      `Successfully reloaded ${commands.length} application (/) commands.`
+    );
   } catch (error) {
     console.error(error);
   }
