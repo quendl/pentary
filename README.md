@@ -1,5 +1,5 @@
 # 🤖 Pentary
-Glups connection to the Discord world! 
+Quendls connection to the Discord world! 
 
 Helps user with a FAQ based command system to find everything they need/are looking for.
 
