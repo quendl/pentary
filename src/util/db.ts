@@ -7,12 +7,12 @@ import path from "path";
 require("dotenv").config({ path: path.resolve(__dirname, "../.././env") });
 
 if (!process.env.MONGODB_TOKEN)
-  throw new Error(`🔴 | No Database Connection string found in dotenv file.`);
+  throw new Error(`🔴 | No Database Connection string found in .env file.`);
 
 myLogger.info("Connecting to Database . . .");
 
 connect(process.env.MONGODB_TOKEN)
   .then(() => {
-    myLogger.success("Successfully connected to database.");
+    myLogger.success("Successfully connected to Database.");
   })
   .catch((error: any) => console.log(error));

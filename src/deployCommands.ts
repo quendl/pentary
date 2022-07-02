@@ -40,7 +40,7 @@ const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
     }
 
     infoLogger.success(
-      `Successfully reloaded ${commands.length} application (/) commands.`
+      `Successfully deployed ${commands.length} application (/) commands.`
     );
   } catch (error) {
     console.error(error);
