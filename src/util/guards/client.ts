@@ -13,5 +13,5 @@ export async function clientCheck(interaction: CommandInteraction) {
 
   const guildQuery = await Guild.findOne({ guildID: interaction.guild?.id });
   if (!guildQuery)
-    return interaction.followUp({ embeds: [embed], ephemeral: true });
+    return interaction.reply({ embeds: [embed], ephemeral: true });
 }
