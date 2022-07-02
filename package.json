@@ -13,7 +13,6 @@
   "author": "github.com/vKxni",
   "license": "ISC",
   "devDependencies": {
-    "@types/diff": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.13.0",
