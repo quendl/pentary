@@ -15,18 +15,34 @@ Docker is available and ready to use, scroll down to learn more ...
 
 -> For hosting we highly recommend a Linux machine (Ubuntu, Debian, ...)
 
-Discord setup:
+#### Setup:
+- Node V16+
+- NPM V8.3+
+- Docker
+- MongoDB
 
 `.env` file
-```
-TOKEN= 
+```md
+# The bot token
+TOKEN=
 
+# Bot configuration
 CLIENT_ID=
 GUILD_ID=
-OWNER= 
-
-MONGODB_TOKEN=
+OWNER=
 NODE_ENV=development
+
+MONGODB_TOKEN=mongodb://localhost:27017/yolo
+
+# Email client
+SERVICE=smtp.gmail.com
+USER=
+PASS=
+TO=
+
+# Logging
+ADMIN_CHANNEL=
+
 ```
 
 `installing` dependencies
@@ -42,6 +58,30 @@ npm run dev
 `building` for production
 ```
 npm run build
+```
+
+### Docker commands (Production)
+
+```
+$ docker build . -t <username/projectname>
+
+$ docker run -p 4040:8080 -d <username/projectname>
+```
+
+```
+$ docker ps 
+
+$ docker images
+
+$ docker container ls 
+
+$ docker logs <container id>
+```
+
+```
+$ docker image rm -f <username/projectname>
+
+$ docker kill <container id>
 ```
 
 > How do actions work?
