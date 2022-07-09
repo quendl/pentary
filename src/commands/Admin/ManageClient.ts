@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, TextChannel } from "discord.js";
 
 // Config
 import nodemailer from "nodemailer";
@@ -17,6 +17,7 @@ module.exports = {
     .setDescription("Switch to a different client state")
     .addSubcommand((sub) =>
       sub.setName("on").setDescription("Enable the client")
+        .addChannelOption((option) => option.setName("channel").setDescription("The channel for the bot").setRequired(true))
     )
     .addSubcommand((sub) =>
       sub.setName("off").setDescription("Disable the client globally")
@@ -28,6 +29,7 @@ module.exports = {
 
     await interaction.deferReply();
     const sub = interaction.options.getSubcommand();
+    const channel = interaction.options.getChannel("channel") as TextChannel;
 
     // embeds
     const successInit = new MessageEmbed()
@@ -38,6 +40,10 @@ module.exports = {
       .setDescription(`${emojis.success} | Client successfully disabled.`)
       .setColor("GREEN");
 
+    const successPublic = new MessageEmbed()
+      .setDescription(`${emojis.success} | I'm now online and ready to use.`)
+      .setColor("GREEN");
+
     const AlreadyInitialized = new MessageEmbed()
       .setDescription(`${emojis.error} | Client already initialized.`)
       .setColor("RED");
@@ -45,6 +51,14 @@ module.exports = {
     const notInitializedYet = new MessageEmbed()
       .setDescription(`${emojis.error} | Client isn't initialized yet.`)
       .setColor("RED");
+
+    // component for the embed
+    const row = new MessageActionRow().addComponents(
+      new MessageButton()
+        .setCustomId("delete")
+        .setEmoji(`🗑️`)
+        .setStyle("PRIMARY")
+    );
 
     const dataQuery = await Guild.findOne({ id: interaction.guild?.id });
     if (sub === "on") {
@@ -58,6 +72,7 @@ module.exports = {
       const newData = new Guild({
         userID: interaction.user.id,
         guildID: interaction.guild?.id,
+        channel: channel?.id,
         Date: new Date(),
       });
       newData.save();
@@ -65,6 +80,10 @@ module.exports = {
         embeds: [successInit],
         ephemeral: true,
       });
+
+      // send a message into the bots channel
+      channel.send({ embeds: [successPublic], components: [row] });
+
       let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
@@ -85,6 +104,7 @@ module.exports = {
 
         Init by: ${interaction.user.tag} (${interaction.user.id})
         Guild: ${interaction.guild?.name} (${interaction.guild?.id})
+        Channel: ${channel?.name} (${channel?.id})
         Date: ${new Date()}
         ---- ---- ----
         `,

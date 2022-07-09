@@ -9,6 +9,14 @@ const SetupChannelSchema = new Schema({
     {
         type: String,
     },
+    channel:
+    {
+        type: String
+    },
+    role:
+    {
+        type: String
+    },
     Date: 
     {
         type: Date,
