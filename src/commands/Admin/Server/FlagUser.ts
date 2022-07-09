@@ -15,7 +15,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("flag")
     // Also known as a "report" command, that staff members can see ...
-    .setDescription("Flag a user for Staff members"),
+    .setDescription("Flag/Report an User"),
   async execute(interaction: CommandInteraction) {
     // check if the user is an owner
     await ownerCheck(interaction);
