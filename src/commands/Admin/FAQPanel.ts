@@ -2,6 +2,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import {
   CommandInteraction,
   MessageActionRow,
+  MessageEmbed,
   MessageSelectMenu,
   TextChannel,
 } from "discord.js";
@@ -27,6 +28,15 @@ module.exports = {
 
     const channel =
       interaction.options.getChannel("channel") || interaction.channel;
+
+    const embed = new MessageEmbed()
+    .setDescription(
+    `Welcome to **${interaction.guild?.name}**!
+     All of the most important questions are listed down below ...
+
+     Do you think something is missing? Suggest it in the chats!
+    `)
+    .setColor("RANDOM")
 
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
@@ -67,6 +77,6 @@ module.exports = {
     );
 
     interaction.reply({ content: "Done!", ephemeral: true });
-    (channel as TextChannel).send({ content: "Select", components: [row] });
+    (channel as TextChannel).send({ embeds: [embed], components: [row] });
   },
 };
