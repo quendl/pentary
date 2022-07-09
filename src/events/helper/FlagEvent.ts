@@ -1,4 +1,5 @@
 import { CommandInteraction, MessageEmbed, TextChannel } from "discord.js";
+
 import emojis from "../../util/frontend/emojis";
 require("dotenv").config();
 
@@ -36,7 +37,7 @@ module.exports = {
         });
 
       interaction.reply({ embeds: [embed], ephemeral: true });
-      adminChannel.send({ embeds: [infoEmbed] });
+      adminChannel.send({ embeds: [infoEmbed]});
     }
   },
 };

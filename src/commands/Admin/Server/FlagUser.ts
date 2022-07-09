@@ -25,7 +25,7 @@ module.exports = {
       .setCustomId("flag-user")
       .setTitle("Pentary Client");
 
-    const firstQuestion = new TextInputComponent()
+    const UserID = new TextInputComponent()
       .setCustomId("user")
       .setLabel("Enter the User ID")
       .setMaxLength(18)
@@ -33,7 +33,7 @@ module.exports = {
       .setRequired(true)
       .setStyle("SHORT");
 
-    const secondQuestion = new TextInputComponent()
+    const FlagType = new TextInputComponent()
       .setCustomId("flagtype")
       .setLabel("Enter the type of flag")
       .setMaxLength(20)
@@ -41,7 +41,7 @@ module.exports = {
       .setRequired(true)
       .setStyle("SHORT");
 
-    const hobbiesInput = new TextInputComponent()
+    const ExtraInfo = new TextInputComponent()
       .setCustomId("addinfo")
       .setLabel("Any additional informations")
       .setMaxLength(100)
@@ -51,15 +51,15 @@ module.exports = {
     // so you need one action row per text input.
     const firstActionRow =
       new MessageActionRow<ModalActionRowComponent>().addComponents(
-        firstQuestion
+        UserID
       );
     const secondQuestionRow =
       new MessageActionRow<ModalActionRowComponent>().addComponents(
-        secondQuestion
+        FlagType
       );
     const thirdActionRow =
       new MessageActionRow<ModalActionRowComponent>().addComponents(
-        hobbiesInput
+        ExtraInfo
       );
     modal.addComponents(firstActionRow, secondQuestionRow, thirdActionRow);
     await interaction.showModal(modal);
