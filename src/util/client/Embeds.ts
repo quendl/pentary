@@ -17,7 +17,7 @@ export function Embed(
     .setAuthor({ name: author });
 }
 
-export function permissionError(description: string) {
+export function permissionErrorEmbed(description: string) {
   return new MessageEmbed()
     .setDescription(`${emojis.error} | You are not allowed to do that!`)
     .setColor("RED")

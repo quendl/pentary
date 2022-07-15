@@ -11,3 +11,14 @@ export function permsCheck(interaction: CommandInteraction) {
   }
   return true;
 }
+
+export function isAdmin(interaction: CommandInteraction) {
+  if (!(interaction.member as GuildMember).permissions.has("ADMINISTRATOR")) {
+    return interaction.reply({
+      content: `${emojis.error} | You need to be an Admin to use this.`,
+      ephemeral: true,
+    });
+  }
+  return true;
+}
+
