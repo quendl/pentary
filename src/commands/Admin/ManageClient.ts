@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, TextChannel } from "discord.js";
+import { CommandInteraction, MessageActionRow, MessageButton, MessageEmbed, TextChannel, Role } from "discord.js";
 
 // Config
 import nodemailer from "nodemailer";
@@ -18,6 +18,7 @@ module.exports = {
     .addSubcommand((sub) =>
       sub.setName("on").setDescription("Enable the client")
         .addChannelOption((option) => option.setName("channel").setDescription("The channel for the bot").setRequired(true))
+        .addRoleOption((option) => option.setName("role").setDescription("The role for the main users").setRequired(true))
     )
     .addSubcommand((sub) =>
       sub.setName("off").setDescription("Disable the client globally")
@@ -30,6 +31,7 @@ module.exports = {
     await interaction.deferReply();
     const sub = interaction.options.getSubcommand();
     const channel = interaction.options.getChannel("channel") as TextChannel;
+    const role = interaction.options.getRole("role") as Role;
 
     // embeds
     const successInit = new MessageEmbed()
@@ -61,43 +63,45 @@ module.exports = {
     );
 
     const dataQuery = await Guild.findOne({ id: interaction.guild?.id });
-    if (sub === "on") {
-      // If there is data, return and dont save new data
-      if (dataQuery)
-        return interaction.followUp({
-          embeds: [AlreadyInitialized],
+    try {
+      if (sub === "on") {
+        // If there is data, return and dont save new data
+        if (dataQuery)
+          return interaction.followUp({
+            embeds: [AlreadyInitialized],
+            ephemeral: true,
+          });
+        // If no data, create new data
+        const newData = new Guild({
+          userID: interaction.user.id,
+          guildID: interaction.guild?.id,
+          role: role.id,
+          channel: channel?.id,
+          Date: new Date(),
+        });
+        newData.save();
+        interaction.followUp({
+          embeds: [successInit],
           ephemeral: true,
         });
-      // If no data, create new data
-      const newData = new Guild({
-        userID: interaction.user.id,
-        guildID: interaction.guild?.id,
-        channel: channel?.id,
-        Date: new Date(),
-      });
-      newData.save();
-      interaction.followUp({
-        embeds: [successInit],
-        ephemeral: true,
-      });
 
-      // send a message into the bots channel
-      channel.send({ embeds: [successPublic], components: [row] });
+        // send a message into the bots channel
+        channel.send({ embeds: [successPublic], components: [row] });
 
-      let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.USER,
-          pass: process.env.PASS,
-        },
-      });
-      await transporter.sendMail({
-        from: "Pentary Logging",
-        to: process.env.TO,
-        subject: "Pentary Client",
-        text: `
+        let transporter = nodemailer.createTransport({
+          host: process.env.SERVICE,
+          port: 587,
+          secure: false,
+          auth: {
+            user: process.env.USER,
+            pass: process.env.PASS,
+          },
+        });
+        await transporter.sendMail({
+          from: "Pentary Logging",
+          to: process.env.TO,
+          subject: "Pentary Client",
+          text: `
         This is a confirmation about ${client.user?.tag}'s state.
 
         ---- ---- ----
@@ -108,19 +112,22 @@ module.exports = {
         Date: ${new Date()}
         ---- ---- ----
         `,
-      });
-    } else if (sub === "off") {
-      // If there isnt anything to delete, dont do anything
-      if (!dataQuery)
-        return interaction.followUp({
-          embeds: [notInitializedYet],
+        });
+      } else if (sub === "off") {
+        // If there isnt anything to delete, dont do anything
+        if (!dataQuery)
+          return interaction.followUp({
+            embeds: [notInitializedYet],
+            ephemeral: true,
+          });
+        dataQuery.delete();
+        interaction.followUp({
+          embeds: [successDisable],
           ephemeral: true,
         });
-      dataQuery.delete();
-      interaction.followUp({
-        embeds: [successDisable],
-        ephemeral: true,
-      });
+      }
+    } catch (error: any) {
+      console.log(error);
     }
   },
 };
