@@ -13,14 +13,12 @@ const VerificationCodes = new Schema({
     {
         type: String
     },
-    /*
     expire_at: 
     {
         type: Date,
         default: Date.now(),
-        expires: 300
+        expires: 500
     },
-    */
 })
 
 const Code = model("ver-codes", VerificationCodes);
