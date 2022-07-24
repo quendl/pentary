@@ -32,7 +32,7 @@ module.exports = {
         )
         .setTimestamp()
         .setAuthor({
-          name: `From: ${interaction.user.username}`,
+          name: `From: ${interaction.user.tag}`,
           iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
         });
 
