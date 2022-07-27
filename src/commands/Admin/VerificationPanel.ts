@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, TextChannel, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import { ownerCheck } from "../../util/guards/owner";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -7,6 +8,9 @@ module.exports = {
         .setDescription("Sends the verification panel"),
     async execute(interaction: CommandInteraction) {
         const channel = interaction.channel as TextChannel;
+
+        await ownerCheck(interaction);
+        if (interaction.replied) return;
 
         const row = new MessageActionRow().addComponents(
             new MessageButton()
