@@ -2,6 +2,8 @@ import { CommandInteraction, MessageEmbed, TextChannel } from "discord.js";
 import { generateCaseID } from "../../util/client/GenerateIDs";
 import emojis from "../../util/frontend/emojis";
 
+const buttonCooldown = new Set();
+
 module.exports = {
   name: "interactionCreate",
   async execute(interaction: CommandInteraction) {
@@ -12,6 +14,10 @@ module.exports = {
         content: `${emojis.success} | Successfully opened review`,
         ephemeral: true,
       });
+
+      if (buttonCooldown.has(interaction.user.id)) return interaction.reply({ content: `<@${interaction.user.id}> you are on cooldown, try again in a few seconds.`, ephemeral: true });
+      buttonCooldown.add(interaction.user.id);
+      setTimeout(() => buttonCooldown.delete(interaction.user.id), 30000);
 
       const embed = new MessageEmbed()
         .setDescription(

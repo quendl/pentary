@@ -19,6 +19,8 @@ function generateID() {
     return retVal;
 }
 
+const buttonCooldown = new Set();
+
 module.exports = {
     name: "interactionCreate",
     async execute(interaction: CommandInteraction) {
@@ -32,8 +34,11 @@ module.exports = {
 
         const isClientEnabled = await ActiveClient.findOne({ guildID: interaction.guild?.id });
 
-
         if (interaction.customId === "create-code") {
+            if (buttonCooldown.has(interaction.user.id)) return interaction.reply({ content: `<@${interaction.user.id}> you are on cooldown, try again in a few seconds.`, ephemeral: true });
+            buttonCooldown.add(interaction.user.id);
+            setTimeout(() => buttonCooldown.delete(interaction.user.id), 30000);
+
             if (!isClientEnabled) return interaction.reply({ content: `${emojis.error} | This is currently disabled`, ephemeral: true });
             if (hasVerificationCode || isVerified) return interaction.reply({ content: `${emojis.error} | You are already verified or have a verification code pending!`, ephemeral: true });
 
