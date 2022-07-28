@@ -26,7 +26,6 @@ module.exports = {
         const roleQuery = await TempRoleSetup.findOne({ userID: target.id });
         if(roleQuery) return interaction.reply({ content: `${target} already has a temp role.`, ephemeral: true }); 
 
-        // @ts-ignore
         if(duration === null) return;
 
         const reg = new RegExp('^[0-9]+$');
