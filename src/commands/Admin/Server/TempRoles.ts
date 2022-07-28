@@ -23,6 +23,9 @@ module.exports = {
         const role = interaction.options.getRole("role") as Role;
         const duration = interaction.options.getString("time");
 
+        const roleQuery = await TempRoleSetup.findOne({ userID: target.id });
+        if(roleQuery) return interaction.reply({ content: `${target} already has a temp role.`, ephemeral: true }); 
+
         // @ts-ignore
         if(duration === null) return;
 
