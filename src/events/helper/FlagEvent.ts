@@ -21,10 +21,12 @@ module.exports = {
       const flagTyped = interaction.fields.getTextInputValue("flagtype");
       const additionalInfos = interaction.fields.getTextInputValue("addinfo");
 
+      if(!interaction.guild?.members.cache.get(userID)) return interaction.reply({ content: `${emojis.error} | Invalid User`, ephemeral: true });
+
       const infoEmbed = new MessageEmbed()
         .setDescription(
           `
-    **User ID:** ${userID}
+    **User:** <@${userID}> (${userID})
     **Flag Type:** ${flagTyped}
 
     **Other information:** ${additionalInfos}
