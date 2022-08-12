@@ -113,7 +113,7 @@ module.exports = {
                     // edit the message and disable the buttons once the time runs out
                     msg.components[0].components.map(c => c.setDisabled(true));
                     await interaction.editReply({ embeds: [timedOut], components: msg.components });
-                } catch (error: any) {
+                } catch (error) {
                     console.log(error)
                 }
             })
