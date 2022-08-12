@@ -14,7 +14,7 @@ module.exports = {
         .setDescription("Temp roles")
         .addUserOption((option) => option.setName("target").setDescription("The user for the temp role").setRequired(true))
         .addRoleOption((option) => option.setName("role").setDescription("The role the user should receive").setRequired(true))
-        .addStringOption((option) => option.setName("time").setDescription("The time in seconds the user should keep the role").setRequired(true)),
+        .addStringOption((option) => option.setName("time").setDescription("The time the user should keep the role").setRequired(true)),
     async execute(interaction: CommandInteraction) {
         await ownerCheck(interaction);
         if (interaction.replied) return;
@@ -28,8 +28,8 @@ module.exports = {
 
         if(duration === null) return;
 
-        const reg = new RegExp('^[0-9]+$');
-        if (!reg.test(duration)) return interaction.reply({ content: "The time must be a number like 10000 (10s)", ephemeral: true });
+        // const reg = new RegExp('^[0-9]+$');
+        // if (!reg.test(duration)) return interaction.reply({ content: "The time must be a number like 10000 (10s)", ephemeral: true });
 
         // convert 10000ms into 10s (example)
         let time; 
